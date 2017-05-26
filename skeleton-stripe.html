@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="skeleton-stripe">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `skeleton-stripe`
+     * Stripe elements and mixings
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class SkeletonStripe extends Polymer.Element {
+      static get is() { return 'skeleton-stripe'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'skeleton-stripe'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(SkeletonStripe.is, SkeletonStripe);
+  </script>
+</dom-module>
