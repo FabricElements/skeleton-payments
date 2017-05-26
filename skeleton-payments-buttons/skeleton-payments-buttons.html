@@ -1,0 +1,217 @@
+<link rel="import" href="../../polymer/polymer-element.html">
+<link rel="import" href="../../paper-button/paper-button.html">
+<link rel="import" href="../icons/skeleton-payments-icons.html">
+
+<dom-module id="skeleton-payments-buttons">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      paper-button {
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin-bottom: 1rem;
+        @apply --skeleton-payments-button;
+      }
+
+      .icon {
+        margin-right: 1rem;
+        @apply --skeleton-payments-button-icon;
+      }
+
+      #standard {
+        @apply --skeleton-payments-button-standard;
+      }
+
+      #apple {
+        @apply --skeleton-payments-button-apple;
+      }
+
+      #android {
+        @apply --skeleton-payments-button-android;
+      }
+
+      #payments {
+        @apply --skeleton-payments-button-payments;
+      }
+    </style>
+    <template is="dom-if" if="[[supportStandard]]">
+      <paper-button on-tap="_callStandard" id="standard">
+        <iron-icon icon$="skeleton-payments-icons:[[iconStandard]]" class="icon"></iron-icon>
+        [[label]]
+      </paper-button>
+    </template>
+    <template is="dom-if" if="[[supportApple]]">
+      <paper-button on-tap="_callApple" id="apple">
+        <iron-icon icon="skeleton-payments-icons:apple" class="icon"></iron-icon>
+        [[label]]
+      </paper-button>
+    </template>
+
+    <template is="dom-if" if="[[supportAndroid]]">
+      <paper-button on-tap="_callAndroid" id="android">
+        <iron-icon icon="skeleton-payments-icons:android" class="icon"></iron-icon>
+        [[label]]
+      </paper-button>
+    </template>
+
+    <template is="dom-if" if="[[supportPayments]]">
+      <paper-button on-tap="_callPayments" id="payments">
+        <iron-icon icon="skeleton-payments-icons:fingerprint" class="icon"></iron-icon>
+        [[label]]
+      </paper-button>
+    </template>
+
+  </template>
+
+  <script>
+    /**
+     * `skeleton-payments-buttons`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class SkeletonPaymentsButtons extends Polymer.Element {
+      static get is() {
+        return 'skeleton-payments-buttons';
+      }
+
+      static get properties() {
+        return {
+          /**
+           * The label for the buttons
+           * */
+          label: {
+            type: String,
+            value: 'PAY NOW'
+          },
+          /**
+           * Display standard payment button
+           * */
+          standard: {
+            type: Boolean,
+            value: false
+          },
+          /**
+           * Display Apple pay button
+           * */
+          apple: {
+            type: Boolean,
+            value: false
+          },
+          /**
+           * Display Android pay button
+           * */
+          android: {
+            type: Boolean,
+            value: false
+          },
+          /**
+           * Display payments request button
+           * */
+          payments: {
+            type: Boolean,
+            value: false
+          },
+          /**
+           * Display all the payment options.
+           * NEVER use this on production.
+           * */
+          debug: {
+            type: Boolean,
+            value: false,
+            observer: "_debugObserver"
+          },
+          /**
+           * Supports Payment request
+           * */
+          supportPayments: {
+            type: Boolean,
+            value: false,
+            readOnly: true
+          },
+          /**
+           * Supports Apple Pay
+           * */
+          supportApple: {
+            type: Boolean,
+            value: false,
+            readOnly: true
+          },
+          /**
+           * Supports Android Pay
+           * */
+          supportAndroid: {
+            type: Boolean,
+            value: false,
+            readOnly: true
+          },
+          /**
+           * Supports standard
+           * */
+          supportStandard: {
+            type: Boolean,
+            value: false,
+            readOnly: true
+          },
+          /**
+           * Icon for the standard button
+           * */
+          iconStandard: {
+            type: String,
+            value: "card"
+          }
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        this._paymentSupport();
+      }
+
+      _callStandard() {
+        this.dispatchEvent(new CustomEvent('kick', {detail: {kicked: true}}));
+        console.log("try to pay");
+      }
+
+      _callApple() {
+        console.log("try to pay");
+      }
+
+      _callAndroid() {
+        console.log("try to pay");
+      }
+
+      _callPayments() {
+        console.log("try to pay");
+      }
+
+      /**
+       * Check browser support and display only valid payment options
+       *
+       * @private
+       */
+      _paymentSupport() {
+        // Standard payment
+        if (this.standard || this.debug) this._setProperty("supportStandard", true);
+        // Apple pay support
+        if (window.ApplePaySession && this.apple || this.debug) this._setProperty("supportApple", true);
+        // Payment Request support
+        if (window.PaymentRequest && this.payments || this.debug) this._setProperty("supportPayments", true);
+      }
+
+      _debugObserver(debug) {
+        if (!debug)  return;
+        this._paymentSupport();
+      }
+
+    }
+
+    window.customElements.define(SkeletonPaymentsButtons.is, SkeletonPaymentsButtons);
+  </script>
+</dom-module>

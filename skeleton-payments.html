@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 
-<dom-module id="skeleton-stripe">
+<dom-module id="skeleton-payments">
   <template>
     <style>
       :host {
@@ -12,25 +12,25 @@
 
   <script>
     /**
-     * `skeleton-stripe`
-     * Stripe elements and mixings
+     * `skeleton-payments`
+     * Payments elements and mixings
      *
      * @customElement
      * @polymer
      * @demo demo/index.html
      */
-    class SkeletonStripe extends Polymer.Element {
-      static get is() { return 'skeleton-stripe'; }
+    class SkeletonPayments extends Polymer.Element {
+      static get is() { return 'skeleton-payments'; }
       static get properties() {
         return {
           prop1: {
             type: String,
-            value: 'skeleton-stripe'
+            value: 'skeleton-payments'
           }
         };
       }
     }
 
-    window.customElements.define(SkeletonStripe.is, SkeletonStripe);
+    window.customElements.define(SkeletonPayments.is, SkeletonPayments);
   </script>
 </dom-module>

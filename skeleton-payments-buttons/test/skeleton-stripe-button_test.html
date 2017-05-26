@@ -4,36 +4,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>skeleton-payments test</title>
+    <title>skeleton-payments-buttons test</title>
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../skeleton-payments.html">
+    <link rel="import" href="../skeleton-payments-buttons.html">
   </head>
   <body>
 
     <test-fixture id="BasicTestFixture">
       <template>
-        <skeleton-payments></skeleton-payments>
+        <skeleton-payments-buttons></skeleton-payments-buttons>
       </template>
     </test-fixture>
 
     <test-fixture id="ChangedPropertyTestFixture">
       <template>
-        <skeleton-payments prop1="new-prop1"></skeleton-payments>
+        <skeleton-payments-buttons prop1="new-prop1"></skeleton-payments-buttons>
       </template>
     </test-fixture>
 
     <script>
-      suite('skeleton-payments', function() {
+      suite('skeleton-payments-buttons', function() {
 
         test('instantiating the element with default properties works', function() {
           var element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'skeleton-payments');
+          assert.equal(element.prop1, 'skeleton-payments-buttons');
           var elementShadowRoot = element.shadowRoot;
           var elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello skeleton-payments!');
+          assert.equal(elementHeader.innerHTML, 'Hello skeleton-payments-buttons!');
         });
 
         test('setting a property on the element works', function() {

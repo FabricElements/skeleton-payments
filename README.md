@@ -1,3 +1,3 @@
-# \<skeleton-stripe\>
+# \<skeleton-payments\>
 
-Stripe elements and mixins
+Payments elements and mixins
