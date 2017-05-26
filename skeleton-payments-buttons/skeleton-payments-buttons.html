@@ -174,21 +174,25 @@
         this._paymentSupport();
       }
 
+      _actionEvent(name) {
+        console.log(name);
+        this.dispatchEvent(new CustomEvent('pay-action', {detail: name, bubbles: true, composed: true}));
+      }
+
       _callStandard() {
-        this.dispatchEvent(new CustomEvent('kick', {detail: {kicked: true}}));
-        console.log("try to pay");
+        this._actionEvent("standard");
       }
 
       _callApple() {
-        console.log("try to pay");
+        this._actionEvent("apple");
       }
 
       _callAndroid() {
-        console.log("try to pay");
+        this._actionEvent("android");
       }
 
       _callPayments() {
-        console.log("try to pay");
+        this._actionEvent("payments");
       }
 
       /**
@@ -201,6 +205,8 @@
         if (this.standard || this.debug) this._setProperty("supportStandard", true);
         // Apple pay support
         if (window.ApplePaySession && this.apple || this.debug) this._setProperty("supportApple", true);
+        // Android pay support
+        if (this.debug) this._setProperty("supportAndroid", true);
         // Payment Request support
         if (window.PaymentRequest && this.payments || this.debug) this._setProperty("supportPayments", true);
       }
