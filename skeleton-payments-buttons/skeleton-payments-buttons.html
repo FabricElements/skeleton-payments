@@ -9,17 +9,20 @@
         display: block;
       }
 
-      paper-button {
-        width: 100%;
-        display: block;
-        text-align: center;
-        margin-bottom: 1rem;
-        @apply --skeleton-payments-button;
-      }
-
       .icon {
         margin-right: 1rem;
         @apply --skeleton-payments-button-icon;
+      }
+
+      paper-button {
+        width: 100%;
+        display: block;
+        margin-bottom: 1rem;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        @apply --skeleton-payments-button;
       }
 
       #standard {
@@ -125,7 +128,7 @@
           debug: {
             type: Boolean,
             value: false,
-            observer: "_debugObserver"
+            observer: "_paymentSupport"
           },
           /**
            * Supports Payment request
@@ -174,26 +177,6 @@
         this._paymentSupport();
       }
 
-      _actionEvent(name) {
-        console.log(name);
-        this.dispatchEvent(new CustomEvent('pay-action', {detail: name, bubbles: true, composed: true}));
-      }
-
-      _callStandard() {
-        this._actionEvent("standard");
-      }
-
-      _callApple() {
-        this._actionEvent("apple");
-      }
-
-      _callAndroid() {
-        this._actionEvent("android");
-      }
-
-      _callPayments() {
-        this._actionEvent("payments");
-      }
 
       /**
        * Check browser support and display only valid payment options
@@ -211,9 +194,50 @@
         if (window.PaymentRequest && this.payments || this.debug) this._setProperty("supportPayments", true);
       }
 
-      _debugObserver(debug) {
-        if (!debug)  return;
-        this._paymentSupport();
+      /**
+       * Fire the pay-action event
+       *
+       * @param name
+       * @private
+       */
+      _actionEvent(name) {
+        this.dispatchEvent(new CustomEvent('pay-action', {detail: name, bubbles: true, composed: true}));
+      }
+
+      /**
+       * Fire standard payment
+       *
+       * @private
+       */
+      _callStandard() {
+        this._actionEvent("standard");
+      }
+
+      /**
+       * Fire Apple payment
+       *
+       * @private
+       */
+      _callApple() {
+        this._actionEvent("apple");
+      }
+
+      /**
+       * Fire Android payment
+       *
+       * @private
+       */
+      _callAndroid() {
+        this._actionEvent("android");
+      }
+
+      /**
+       * Fire Payment Request payment
+       *
+       * @private
+       */
+      _callPayments() {
+        this._actionEvent("payments");
       }
 
     }

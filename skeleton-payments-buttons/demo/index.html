@@ -10,6 +10,7 @@
 
   <link rel="import" href="../../../iron-demo-helpers/demo-pages-shared-styles.html">
   <link rel="import" href="../../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../../polymer/lib/elements/custom-style.html">
   <link rel="import" href="../skeleton-payments-buttons.html">
 
   <custom-style>
@@ -30,16 +31,38 @@
   <p><strong>Note:</strong> Only the browser available payments will show to the user.</p>
   <demo-snippet>
     <template>
-      <skeleton-payments-buttons standard payments apple></skeleton-payments-buttons>
+      <skeleton-payments-buttons standard apple android payments></skeleton-payments-buttons>
     </template>
   </demo-snippet>
 </div>
 <div class="vertical-section-container centered">
   <h3>Debug skeleton-payments-buttons demo</h3>
-  <p>Show all the payment options</p>
+  <p><strong>debug</strong> attribute: Show all the payment options</p>
   <demo-snippet>
     <template>
-      <skeleton-payments-buttons debug></skeleton-payments-buttons>
+      <custom-style>
+        <style is="custom-style">
+          #buttons {
+            --skeleton-payments-button: {
+              border-radius: 1px;
+              background-color: #424242;
+              color: white;
+              border-radius: 20px;
+            };
+            --skeleton-payments-button-apple: {
+              background-color: black;
+            };
+            --skeleton-payments-button-android: {
+              background-color: #4CAF50;
+            };
+            --skeleton-payments-button-payments: {
+              background-color: #3F51B5;
+            };
+          }
+        </style>
+      </custom-style>
+
+      <skeleton-payments-buttons debug id="buttons"></skeleton-payments-buttons>
     </template>
   </demo-snippet>
 </div>
