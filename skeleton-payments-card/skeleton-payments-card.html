@@ -1,0 +1,62 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-input/paper-input.html">
+
+<dom-module id="skeleton-payments-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <paper-input label="Number" value="[[number]]" type="number" required></paper-input>
+    <paper-input label="CCV" value="[[ccv]]" type="number" required></paper-input>
+    <paper-input label="Exp Month" value="[[expMonth]]" type="number" size="2" required></paper-input>
+    <paper-input label="Exp Year" value="[[expYear]]" type="number" size="4" required></paper-input>
+    <paper-input label="Zip" value="[[zip]]" type="text"></paper-input>
+  </template>
+
+  <script>
+    /**
+     * `skeleton-payments-card`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class SkeletonPaymentsCard extends Polymer.Element {
+      static get is() { return 'skeleton-payments-card'; }
+      static get properties() {
+        return {
+          number:{
+            type: Number,
+            value: null,
+            reflectToAttribute: true
+          },
+          ccv:{
+            type: Number,
+            value: null,
+            reflectToAttribute: true
+          },
+          expMonth: {
+            type: Number,
+            value: null,
+            reflectToAttribute: true
+          },
+          expYear: {
+            type: Number,
+            value: null,
+            reflectToAttribute: true
+          },
+          zip:{
+            type: String,
+            value: null,
+            reflectToAttribute: true
+          }
+        };
+      }
+    }
+
+    window.customElements.define(SkeletonPaymentsCard.is, SkeletonPaymentsCard);
+  </script>
+</dom-module>
