@@ -7,12 +7,19 @@
       :host {
         display: block;
       }
+      paper-button{
+        background-color: var(--paper-blue-700);
+        color: white;
+        @apply --skeleton-payments-card-button;
+        @apply --skeleton-payments-card-button-color;
+      }
     </style>
-    <paper-input label="Number" value="[[number]]" type="number" required></paper-input>
-    <paper-input label="CCV" value="[[ccv]]" type="number" required></paper-input>
+    <paper-input label="Number" value="[[number]]" type="number" min-lenght="12" max-lenght="19" required></paper-input>
+    <paper-input label="CCV" value="[[ccv]]" type="number" min-lenght="2" max-lenght="4" required></paper-input>
     <paper-input label="Exp Month" value="[[expMonth]]" type="number" size="2" required></paper-input>
     <paper-input label="Exp Year" value="[[expYear]]" type="number" size="4" required></paper-input>
-    <paper-input label="Zip" value="[[zip]]" type="text"></paper-input>
+    <paper-input label="Zip" value="[[zip]]" type="text" ></paper-input>
+    <!-- TODO - Añadir icono en paper-input para Number, CCV, Zip -->
   </template>
 
   <script>
